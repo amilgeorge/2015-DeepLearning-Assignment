@@ -38,7 +38,7 @@ def display_reconstructions(inp,out,filename):
 def display_sparse_encoder(W,filename):
     W_cols = W.shape[1]
     fig= plt.figure()
-    fig.set_size_inches(100, 100)
+    fig.set_size_inches(50, 50)
     disp_row_size = np.ceil(np.sqrt(W_cols))
     subplot_rows =disp_row_size
     subplot_cols =disp_row_size

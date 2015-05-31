@@ -1,1 +1,0 @@
-python main_sparse_autoencoder.py -hu 300 

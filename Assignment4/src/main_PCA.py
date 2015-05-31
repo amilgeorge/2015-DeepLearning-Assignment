@@ -44,7 +44,7 @@ CLIMIN_GD_ALGO = "climin_gd"
 
 def _argparse():
     
-    argparse1 = ArgumentParser('main_LR.py',formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    argparse1 = ArgumentParser('main_PCA.py',formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     argparse1.add_argument('-d', help = "data set to be used 1. \'mnist\', \n 2. \'cifar\'",default="mnist")
     
 

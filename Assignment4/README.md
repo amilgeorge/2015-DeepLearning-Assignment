@@ -15,11 +15,11 @@ Sparse auto encoder is implemented in the file SparseAutoEncoder.py.
 
 Problem 23
 -----------
-The visualization of the learnt filters can be saved in Observations/AutoEncoder/2015-05-29 22:48:49
+The visualization of the learnt filters can be saved in Observations/AutoEncoder/2015-05-31 18:48:24
 
 Problem 24
 -----------
-The visualization of mnist data set are saved in Observations/AutoEncoder/2015-05-29 22:48:49/mnistvisualization.png
+The visualization of mnist data set are saved in Observations/AutoEncoder/2015-05-31 18:48:24/mnistvisualization.png
 
 
 Usage
@@ -29,7 +29,7 @@ PCA
 ------------------
 
 ```
-usage: main_LR.py [-h] [-d D]
+usage: main_PCA.py [-h] [-d D]
 
 optional arguments:
 -h, --help  show this help message and exit
