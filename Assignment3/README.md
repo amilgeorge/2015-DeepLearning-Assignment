@@ -67,7 +67,7 @@ Regularization Drop out rate (default: 0.0)
 ### Gradient Descent
 
 To train the network using custom implemented gradient descent method
-'''
+```
 usage: main_LR.py gd [-h] [-t T] [-b BATCH_SIZE] [-l LEARNING_RATE] [-l1 L1]
 [-l2 L2]
 
@@ -80,7 +80,7 @@ size of batch
 learning rate
 -l1 L1, --l1 L1       L1 Regularization constant
 -l2 L2, --l2 L2       L2 Regularization constant
-'''
+```
 
 ### RMSProp
 
