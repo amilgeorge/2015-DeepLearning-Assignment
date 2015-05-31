@@ -60,21 +60,21 @@ def plot_errors(file_dir):
 def custom_plot():
     obs_dir = os.path.join("..","Observations")
     
-    err_file1 = os.path.join(obs_dir,"2015-05-31 04:05:21",'train_err.txt')
-    err_file2 = os.path.join(obs_dir,"2015-05-31 04:02:29",'train_err.txt')
-    err_file3 = os.path.join(obs_dir,'2015-05-31 03:55:52','train_err.txt')
-    target_file = os.path.join(obs_dir,'activation_comparison.png')
+    err_file1 = os.path.join(obs_dir,"2015-05-31 02:55:21",'train_err.txt')
+    err_file2 = os.path.join(obs_dir,"2015-05-31 15:13:19",'train_err.txt')
+    #err_file3 = os.path.join(obs_dir,'2015-05-31 03:55:52','train_err.txt')
+    target_file = os.path.join(obs_dir,'training_algo_comparison.png')
     train_errors=np.loadtxt(err_file1, delimiter=" ")
     valid_errors=np.loadtxt(err_file2, delimiter=" ")
-    test_errors=np.loadtxt(err_file3, delimiter=" ")
+    #test_errors=np.loadtxt(err_file3, delimiter=" ")
     train_errors [:,1]= train_errors[:,1] *100
-    test_errors[:,1] = test_errors[:,1] *100
+    #test_errors[:,1] = test_errors[:,1] *100
     valid_errors[:,1] = valid_errors[:,1] *100
     fig= plt.figure()
-    fig.suptitle('Training with different activation functions', fontsize=14, fontweight='bold')
-    plt.plot(train_errors[:,0],train_errors[:,1],'r--',label="Sigmoid ")
-    plt.plot(valid_errors[:,0],valid_errors[:,1],'b--',label = "Rectified Linear Units")
-    plt.plot(test_errors[:,0],test_errors[:,1],'g--',label="tanh")
+    fig.suptitle('Training with different algorithms', fontsize=14, fontweight='bold')
+    plt.plot(train_errors[:,0],train_errors[:,1],'r--',label="Gradient Descent ")
+    plt.plot(valid_errors[:,0],valid_errors[:,1],'b--',label = "RMSProp")
+    #plt.plot(test_errors[:,0],test_errors[:,1],'g--',label="tanh")
     plt.xlabel('Iteration Number')
     plt.ylabel('Error')
     #plt.title('Error Curves')

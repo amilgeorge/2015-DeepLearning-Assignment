@@ -34,16 +34,74 @@ Each successful execution creates the plot repFields.png in the directory named 
 
 Problem 19
 -----------
+Custom implemented RMSProp trainer can acheive a test error of ~2.2 %. The sample run can be found in the folder Observations/2015-05-31 15:13:19. 
+
 
 Usage
 ======
 
 Neural Network
 ---------------
-Implementation of 
+Implementation of neural network with regularization featues like dropout, l1,l2 regularization. The hidden layer of the can support multiple functions. The number of neurons can also be configured
 
+```
+usage: main_LR.py [-h] [-a ACTIVATION] [-hu HU] [-d DROPOUT_RATE]
+{gd,rmsprop} ...
 
+positional arguments:
+{gd,rmsprop}
+gd                  Gradient Descent
+rmsprop             RMSProp algo
 
+optional arguments:
+-h, --help            show this help message and exit
+-a ACTIVATION, --activation ACTIVATION
+activation to be used in the hidden layer 1. tanh 2.
+sigmoid 3. relu (default: tanh)
+-hu HU                number of neurons in the hidden layer (default: 300)
+-d DROPOUT_RATE, --dropout_rate DROPOUT_RATE
+Regularization Drop out rate (default: 0.0)
+
+```
+
+### Gradient Descent
+
+To train the network using custom implemented gradient descent method
+'''
+usage: main_LR.py gd [-h] [-t T] [-b BATCH_SIZE] [-l LEARNING_RATE] [-l1 L1]
+[-l2 L2]
+
+optional arguments:
+-h, --help            show this help message and exit
+-t T                  maximum iterations
+-b BATCH_SIZE, --batch_size BATCH_SIZE
+size of batch
+-l LEARNING_RATE, --learning_rate LEARNING_RATE
+learning rate
+-l1 L1, --l1 L1       L1 Regularization constant
+-l2 L2, --l2 L2       L2 Regularization constant
+'''
+
+### RMSProp
+
+To train the network using custom implemented rmsprop algorithm
+
+```
+usage: main_LR.py rmsprop [-h] [-t T] [-b BATCH_SIZE] [-l LEARNING_RATE]
+[-l1 L1] [-l2 L2] [-d DECAY]
+
+optional arguments:
+-h, --help            show this help message and exit
+-t T                  maximum iterations
+-b BATCH_SIZE, --batch_size BATCH_SIZE
+size of batch
+-l LEARNING_RATE, --learning_rate LEARNING_RATE
+learning rate
+-l1 L1, --l1 L1       L1 Regularization constant
+-l2 L2, --l2 L2       L2 Regularization constant
+-d DECAY, --decay DECAY
+Decay parameter for the moving average.
+```
 
 
 

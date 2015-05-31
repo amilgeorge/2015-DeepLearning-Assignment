@@ -16,6 +16,7 @@ from numpy.distutils.misc_util import gpaths
 from theano.compile.sharedvalue import shared
 from Util import check_create_observations_dir
 from Visualizer import display
+from DataLoader import DataLoader
 
 class rms_prop_trainer(trainer):
     '''
@@ -23,18 +24,20 @@ class rms_prop_trainer(trainer):
     '''
 
 
-    def __init__(self, learning_rate=0.01, L1_reg=0.00, L2_reg=0.0001, n_epochs=1000, batch_size=20):
+    def __init__(self, learning_rate=0.001, L1_reg=0.00, L2_reg=0.0001, n_epochs=1000, batch_size=20,decay = 0.9):
         '''
         Constructor
         learning_rate=0.01, L1_reg=0.00, L2_reg=0.0001, n_epochs=1000,
              dataset='mnist.pkl.gz', batch_size=20, n_hidden=500
         '''
-        self.batch_size = 20
-        self.L1_lambda = 0.00;
-        self.L2_lambda = 0.0001;
-        self.decay =0.9;
+        trainer.__init__(self)
+        self.learning_rate = 0.001
+        self.batch_size = batch_size
+        self.L1_lambda = L1_reg;
+        self.L2_lambda =L2_reg;
+        self.decay =decay;
         self.momentum = 0;
-        self.n_epochs=1000;
+        self.n_epochs=n_epochs;
         self.early_stopping_threshold = 0.995
         
         
@@ -42,7 +45,8 @@ class rms_prop_trainer(trainer):
         
         trainer.train_NN(self, nn) 
                   
-        datasets = self.load_data()
+        data_loader = DataLoader()
+        datasets = data_loader.load_shared_data()
     
         train_set_x, train_set_y = datasets[0]
         valid_set_x, valid_set_y = datasets[1]
@@ -62,7 +66,7 @@ class rms_prop_trainer(trainer):
         cost = (
         nn.negative_log_likelihood(y)
         + self.L1_lambda * nn.L1
-        + self.L2_lambda * nn.L2_sqr
+        + self.L2_lambda * nn.L2
         )
         
         test_err_model = theano.function(
@@ -83,7 +87,7 @@ class rms_prop_trainer(trainer):
         })
         
         
-        gparams = [T.grad(cost, param) for param in mlp.params];
+        gparams = [T.grad(cost, param) for param in nn.params];
         
         s =nn.params
 #         grad_model = theano.function(
@@ -114,7 +118,7 @@ class rms_prop_trainer(trainer):
             obj=theano.shared(
              value=np.ones(
                  (p.shape),
-                 dtype=theano.config.floatX
+                 dtype=theano.config.floatX  # @UndefinedVariable
              ),
             name = "xysdfa" ,
             borrow=True
@@ -132,7 +136,7 @@ class rms_prop_trainer(trainer):
         #mean_square_update = [(r, self.decay * r + (1 - self.decay) * g**2) for r, g in zip(mean_square_t, gparams)]
         new_mean_square_t =[self.decay * mt + (1-self.decay) * gp**2 for gp,mt in zip (gparams,mean_square_t)]
         mean_square_update =[(t,t_plus_1) for t,t_plus_1 in zip(mean_square_t,new_mean_square_t)]
-        param_update =[(param, param - ( 0.001*gp/(T.sqrt(mt+1e-8)))) for param, gp,mt in zip(mlp_params, gparams,new_mean_square_t) ]
+        param_update =[(param, param - ( self.learning_rate*gp/(T.sqrt(mt+1e-8)))) for param, gp,mt in zip(mlp_params, gparams,new_mean_square_t) ]
         #mt+1e-8
         #r_t_minus_1 = np.zeros(mlp.params.shape);
         #r_t = np.zeros(mlp.params.shape);

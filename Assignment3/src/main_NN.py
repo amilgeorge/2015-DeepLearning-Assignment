@@ -7,6 +7,7 @@ Created on 26-May-2015
 from gradient_descent_trainer import gradient_descent_trainer
 
 from NeuralNetwork import NeuralNetwork
+from rms_prop_trainer import rms_prop_trainer
 
 '''
 Created on 25-May-2015
@@ -54,7 +55,7 @@ def _argparse():
     subparsers = argparse1.add_subparsers(dest='algo')
     gd_parser = subparsers.add_parser(GD_ALGO,help = "Gradient Descent")
     rmsprop_parser = subparsers.add_parser(RMS_PROP_ALGO,help = "RMSProp algo")
-    climin_gd_parser = subparsers.add_parser(CLIMIN_GD_ALGO,help = "Climin Gradient Descent")
+    #climin_gd_parser = subparsers.add_parser(CLIMIN_GD_ALGO,help = "Climin Gradient Descent")
     
     
     ######################
@@ -69,11 +70,11 @@ def _argparse():
     #############################
     #CLIMIN GD Trainer Arguments#
     #############################
-    climin_gd_parser.add_argument('-t', type=int,help = 'maximum iterations', default=DEFAULT_CLIMIN_GD_MAX_ITERATIONS)
-    climin_gd_parser.add_argument('-b', '--batch_size', help = 'size of batch',type=int, default=DEFAULT_CLIMIN_GD_BATCH_SIZE)
-    climin_gd_parser.add_argument('-l', '--learning_rate', help = 'learning rate',type=float, default=DEFAULT_CLIMIN_GD_LEARNING_RATE)
-    climin_gd_parser.add_argument('-l1', '--l1', help = 'L1 Regularization constant',type=float, default=DEFAULT_CLIMIN_GD_L1_LAMBDA)
-    climin_gd_parser.add_argument('-l2', '--l2', help = 'L2 Regularization constant',type=float, default=DEFAULT_CLIMIN_GD_L2_LAMBDA)
+#     climin_gd_parser.add_argument('-t', type=int,help = 'maximum iterations', default=DEFAULT_CLIMIN_GD_MAX_ITERATIONS)
+#     climin_gd_parser.add_argument('-b', '--batch_size', help = 'size of batch',type=int, default=DEFAULT_CLIMIN_GD_BATCH_SIZE)
+#     climin_gd_parser.add_argument('-l', '--learning_rate', help = 'learning rate',type=float, default=DEFAULT_CLIMIN_GD_LEARNING_RATE)
+#     climin_gd_parser.add_argument('-l1', '--l1', help = 'L1 Regularization constant',type=float, default=DEFAULT_CLIMIN_GD_L1_LAMBDA)
+#     climin_gd_parser.add_argument('-l2', '--l2', help = 'L2 Regularization constant',type=float, default=DEFAULT_CLIMIN_GD_L2_LAMBDA)
 
     #############################
     #RMSProp Trainer Arguments#
@@ -84,7 +85,7 @@ def _argparse():
     rmsprop_parser.add_argument('-l1', '--l1', help = 'L1 Regularization constant',type=float, default=DEFAULT_CLIMIN_GD_L1_LAMBDA)
     rmsprop_parser.add_argument('-l2', '--l2', help = 'L2 Regularization constant',type=float, default=DEFAULT_CLIMIN_GD_L2_LAMBDA)
     rmsprop_parser.add_argument('-d', '--decay', help = 'Decay parameter for the moving average.',type=float, default=DEFAULT_RMSPROP_DECAY)
-    rmsprop_parser.add_argument('-m', '--momentum', help = 'Momentum to use during optimization.',type=float, default=DEFAULT_RMSPROP_MOMENTUM)
+    #rmsprop_parser.add_argument('-m', '--momentum', help = 'Momentum to use during optimization.',type=float, default=DEFAULT_RMSPROP_MOMENTUM)
     return argparse1
 
 
@@ -100,17 +101,13 @@ def main(args):
     help_f.close()
     output_dir = None
     if algo==RMS_PROP_ALGO:
-        classifier = NeuralNetwork(28 * 28,argp.hu,10);
-        trainer=gradient_descent_trainer(argp.learning_rate,argp.l1,argp.l2,argp.t,argp.batch_size)
-        trainer.train_LR(classifier)
+        classifier = NeuralNetwork(28 * 28,argp.hu,10,argp.activation,argp.dropout_rate);
+        trainer=rms_prop_trainer(argp.learning_rate,argp.l1,argp.l2,argp.t,argp.batch_size,argp.decay)
+        trainer.train_NN(classifier)
         output_dir=trainer.output_directory 
-#     elif algo == CLIMIN_GD_ALGO:
-# #         classifier = NeuralNetwork(28 * 28,10);
-# #         trainer=climin_trainer(argp.batch_size,argp.learning_rate,argp.l1,argp.l2,argp.t)
-# #         trainer.train_LR(classifier)
-# #         output_dir=trainer.output_directory 
+
     else:
-        classifier = NeuralNetwork(28 * 28,argp.hu,10,argp.activation);
+        classifier = NeuralNetwork(28 * 28,argp.hu,10,argp.activation,argp.dropout_rate);
         trainer=gradient_descent_trainer(argp.learning_rate,argp.l1,argp.l2,argp.t,argp.batch_size)
         trainer.train_NN(classifier)
         output_dir=trainer.output_directory 

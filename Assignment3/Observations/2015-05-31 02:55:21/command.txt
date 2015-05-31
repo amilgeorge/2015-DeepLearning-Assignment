@@ -1,1 +1,1 @@
-python /Users/amilgeorge/git/2015-DL-AmilGeorge/Assignment3/src/main_NN.py gd 
+python main_NN.py gd 
