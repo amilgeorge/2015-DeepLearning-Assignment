@@ -1,6 +1,26 @@
 Assignment 6
 =============
 
+Problem 30
+-----------
+Kmeans is implemented in the file src/MiniBatchKMeans.py
+
+Problem 31
+-----------
+Receptive fields can be found at Observations/2015-05-25 18:53:38/repFields.png.
+
+Images are converted into 12 X 12 pixel size by taking a random patch of the size from the original image.
+As human beings are able to classify image by looking at a part of image; we would be able to classify by looking 
+at the image patch
+
+Bonus Problem
+---------------
+Implemented in the file src/MiniBatchKMeans.py. Batch size can be passed as an argument to the program
+
+
+Usage
+======
+__Before starting copy mnist.pkl.gz to data folder__
 
 Mini Batch K Means
 ------------------
