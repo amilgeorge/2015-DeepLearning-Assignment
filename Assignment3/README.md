@@ -4,12 +4,15 @@ Assignment 3
 Problem 14
 -----------
 Neural network is implemented in the file - NeuralNetwork.py
+
 Gradient Descent with mini batches is implemented in the file - gradient_descent_trainer.py
+
 RMSPRop is implemented in the file - rms_prop_trainer.py
 
 Early stopping condition is used to stop training when the validation error 
 
 L1, L2 regularization are implemented as part of the cost function in training algorithm
+
 Dropout implemented in the NeuralNetwork drops the weights according to dropout_rate
 
 Problem 15
