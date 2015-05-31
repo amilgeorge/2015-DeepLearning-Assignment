@@ -52,6 +52,9 @@ It is a bad practice to
 Usage
 =====
 
+
+__Before starting copy mnist.pkl.gz to data folder__
+
 Logistic Regression
 ------------------
 

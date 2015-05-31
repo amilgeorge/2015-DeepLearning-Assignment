@@ -11,25 +11,51 @@ PCA scatter plots are saved in Observations/PCA/2015-05-28 22:38:13
 
 Problem 22
 -----------
-Sparse auto encoder is implemented in the file SparseAutoEncoder.py.
+Sparse auto encoder is implemented in the file SparseAutoEncoder.py. Training using squared error and L1 penalty can be found in the folder : ______
 
 Problem 23
 -----------
 The visualization of the learnt filters can be saved in Observations/AutoEncoder/2015-05-29 22:48:49
 
+
 Problem 24
 -----------
-The visualization of mnist data set are saved in Observations/AutoEncoder/2015-05-29 22:48:49/mnistvisualization.png
+
+Sparsity condition forces most of the hidden unit activations to stay close to the zero value. 
+
+As sparsity hyperparmeter increases the reconstructions become less accurate as more hidden units are forced closer to zero.
+Observations for  sparsity hyperparmeter set to 1 can be found at Observations/AutoEncoder/2015-05-31 23:27:12
+Observarions for sparsity hyperparmeter set to .01 can be found at Observations/AutoEncoder/2015-05-31 23:33:01
+
+
+Problem 25
+-----------
+Each tile in autoencoderfilter.png represent the pattern or stucture the hidden unit has learnt. As the sparsity parameter is increased more hidden units have activation closer to zero
+
+
+
+Problem 26
+-----------
+
+MNIST dataset itself is sparse because each image contains only a digit and most of the area in the image is filled with zeros. 
+
+Sparse encoding of MNIST datasets creates a new representation of the MNIST data as a linear combination of basis vectors. Since its a sparse representation most of the coefficients of basis vectors will be close to zero
+
+
 
 
 Usage
 =====
 
+Before starting copy 'cifar-10-batches-py'(unzipped) and mnist.pkl.gz to data folder
+
 PCA
 ------------------
 
+Implementation of PCA for mnist and cifar dataset
+
 ```
-usage: main_LR.py [-h] [-d D]
+usage: main_PCA.py [-h] [-d D]
 
 optional arguments:
 -h, --help  show this help message and exit
@@ -39,10 +65,23 @@ optional arguments:
 
 Sparse Auto Encoder
 --------------------
+Implementation of the sparse encoder that supports different reconstruction cost functions and sparsity cost functions.
+
+The following sparsity costs are supported:
+
+1. KL Divergence
+
+2. L1 Penalty
+
+The following reconstruction costs are supported:
+
+1. Squared Error
+
+2. Cross Entropy
 
 ```
 usage: main_sparse_autoencoder.py [-h] [-hu HU] [-t T] [-b BATCH_SIZE]
-[-l LEARNING_RATE] [-sl SL]
+[-l LEARNING_RATE] [-r R] [-sc SC] [-sl SL]
 
 optional arguments:
 -h, --help            show this help message and exit
@@ -52,7 +91,13 @@ optional arguments:
 size of batch (default: 600)
 -l LEARNING_RATE, --learning_rate LEARNING_RATE
 learning rate (default: 0.01)
+-r R                  reconstruction cost function 1. 'cross_entropy' 2.
+'sqr' - squared error function (default:
+cross_entropy)
+-sc SC                sparsity cost function 1. 'kl' - KL Divergence 2. 'l1'
+- L1 penalty (default: kl)
 -sl SL, --sl SL       sparsity regularization constant (default: 0.01)
+
 ```
 
 

@@ -32,7 +32,7 @@ def display_reconstructions(inp,out,filename):
         plots[i,1].imshow(img2)
          
    
-       
+    plt.set_cmap('binary')   
     plt.savefig(filename) 
        
 def display_sparse_encoder(W,filename):
@@ -44,15 +44,23 @@ def display_sparse_encoder(W,filename):
     subplot_cols =disp_row_size
     for i in xrange(W_cols):
         data_row = W[:,i]
-        img=dispaly_row(data_row)
+        img=dispaly_row_without_min_subtract(data_row)
         subplot = fig.add_subplot(subplot_rows, subplot_cols, i+1)    
         subplot.get_xaxis().set_visible(False)
         subplot.get_yaxis().set_visible(False)
         subplot.imshow(img)  # @UndefinedVariable
     
-    plt.set_cmap('spectral')
+    plt.set_cmap('binary')
+    #plt.colorbar()
     plt.savefig(filename)
-   
+
+def dispaly_row_without_min_subtract(data_row):
+  
+    #data_row = data_row - data_row.min()
+    #   data_row = data_row + data_row.min()
+    data_row = data_row/data_row.max()
+    img = data_row.reshape(28,28).astype('float32')
+    return img   
     
 def dispaly_row(data_row):
   

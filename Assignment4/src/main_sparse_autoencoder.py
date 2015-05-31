@@ -57,6 +57,9 @@ def _argparse():
     argparse1.add_argument('-t', type=int,help = 'maximum iterations', default=DEFAULT_GD_MAX_ITERATIONS)
     argparse1.add_argument('-b', '--batch_size', help = 'size of batch',type=int, default=DEFAULT_GD_BATCH_SIZE)
     argparse1.add_argument('-l', '--learning_rate', help = 'learning rate',type=float, default=DEFAULT_GD_LEARNING_RATE)
+    argparse1.add_argument('-r', help = 'reconstruction cost function 1. \'cross_entropy\' 2. \'sqr\' - squared error function ', default='cross_entropy')
+    argparse1.add_argument('-sc', help = 'sparsity cost function 1. \'kl\' - KL Divergence 2. \'l1\' - L1 penalty ', default='kl')
+
     argparse1.add_argument('-sl', '--sl', help = 'sparsity regularization constant',type=float, default=DEFAULT_GD_SPARSITY_LAMBDA)
    
     return argparse1
@@ -76,7 +79,7 @@ def main(args):
     
    
     
-    trainer = sgd_trainer(argp.batch_size,argp.learning_rate,argp.sl,argp.t)
+    trainer = sgd_trainer(argp.batch_size,argp.learning_rate,argp.sl,argp.t,argp.r,argp.sc)
     trainer.trainAutoEncoder(sae);
     W=sae.W1.get_value(borrow=True)
     
@@ -87,7 +90,7 @@ def main(args):
     test_set_x,test_set_y = datasets[2]
     test_inpt = test_set_x[:10,:]
     
-    mnist_vis_file = os.path.join(out_dir,"mnistvisualization.png")
+    mnist_vis_file = os.path.join(out_dir,"autoencoderrec.png")
     display_reconstructions(test_inpt,sae.encode(test_inpt),mnist_vis_file)
     
     cmd_file_path=os.path.join(out_dir,"command.txt")

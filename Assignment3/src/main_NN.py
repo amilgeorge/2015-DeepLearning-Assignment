@@ -96,9 +96,9 @@ def main(args):
    
     argp = _argparse().parse_args(args[1:])
     algo = argp.algo
-    help_f = open('help.md', 'w')
-    _argparse().print_help(file=help_f)
-    help_f.close()
+#     help_f = open('help.md', 'w')
+#     _argparse().print_help(file=help_f)
+#     help_f.close()
     output_dir = None
     if algo==RMS_PROP_ALGO:
         classifier = NeuralNetwork(28 * 28,argp.hu,10,argp.activation,argp.dropout_rate);

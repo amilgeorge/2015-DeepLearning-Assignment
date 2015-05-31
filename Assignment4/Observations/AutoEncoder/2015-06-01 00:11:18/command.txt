@@ -1,0 +1,1 @@
+python main_sparse_autoencoder.py -r sqr -sc l1 -sl 0.01 

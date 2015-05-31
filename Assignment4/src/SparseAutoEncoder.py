@@ -32,6 +32,8 @@ class SparseAutoEncoder(object):
                 ),
                 dtype=theano.config.floatX  # @UndefinedVariable
             )
+        
+ 
         self.W1 = theano.shared(value=W1_init, name='W', borrow=True)
         
         self.b1 = theano.shared(
@@ -81,7 +83,24 @@ class SparseAutoEncoder(object):
         cost = T.mean(L);
         
         return cost
+    
+    def get_squared_error_cost(self):
      
+        x=self.input
+        y = self.get_hidden_values(x)
+        z= self.get_reconstructed_input(y)
+        L = T.sum((z-x)**2, axis=1)
+        cost = T.mean(L);
+        
+        return cost
+    
+    def get_L1_cost(self):
+        x=self.input
+        y = self.get_hidden_values(x)
+        L = T.sum(abs(y), axis=1)
+        cost = T.mean(L);
+        
+        return  cost     
     '''
     x = 20 X 728
     y = 20 X 500

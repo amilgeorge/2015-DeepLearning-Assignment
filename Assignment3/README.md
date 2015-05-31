@@ -43,6 +43,8 @@ Custom implemented RMSProp trainer can acheive a test error of ~2.2 %. The sampl
 Usage
 ======
 
+__Before starting copy mnist.pkl.gz to data folder__
+
 Neural Network
 ---------------
 Implementation of neural network with regularization featues like dropout, l1,l2 regularization. The hidden layer of the can support multiple functions. The number of neurons can also be configured
