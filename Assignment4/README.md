@@ -43,6 +43,15 @@ MNIST dataset itself is sparse because each image contains only a digit and most
 Sparse encoding of MNIST datasets creates a new representation of the MNIST data as a linear combination of basis vectors. Since its a sparse representation most of the coefficients of basis vectors will be close to zero
 
 
+Bonus Problem
+--------------
+
+The training algorithm is implemented with pluggable sparsity and reconstruction cost functions.
+KL divergence is implemnted in the SparseAutoEncoder.
+
+While executing the program pass the sparsity parameter(-sc) as 'kl' to use kl divergence as sparsity cost
+
+
 
 Usage
 =====

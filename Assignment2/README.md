@@ -47,7 +47,10 @@ Problem 13
 
 GD method acheives a training error of ~7.09 % with certain parameter settings and a stopping criteria that allowed to continue training till the validation error increases beyond a certain threshold margin compared to the best validation error. Please refer to the folder Observations/2015-05-28 05:15:22.
 
-It is a bad practice to 
+Bonus Question
+---------------
+It is a bad practice to force the error rate to become too low because it might result in overfitting. We want our ML algorithms to perform well in real world conditions and not only on the training data.
+
 
 Usage
 =====

@@ -11,9 +11,19 @@ RMSPRop is implemented in the file - rms_prop_trainer.py
 
 Early stopping condition is used to stop training when the validation error 
 
-L1, L2 regularization are implemented as part of the cost function in training algorithm
 
-Dropout implemented in the NeuralNetwork drops the weights according to dropout_rate
+Bonus Question
+--------------
+
+The following regularization approaches are implemented:
+
+1. L1 Regularization
+
+2. Weight Decay(L2 Regularization)
+(L1, L2 regularization are implemented as part of the cost function in training algorithm)
+
+3. Dropout
+(Dropout implemented in the NeuralNetwork.py drops the weights according to dropout_rate)
 
 Problem 15
 -----------
