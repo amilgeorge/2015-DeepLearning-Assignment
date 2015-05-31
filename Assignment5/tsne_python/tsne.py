@@ -11,8 +11,10 @@
 #  Copyright (c) 2008 Tilburg University. All rights reserved.
 
 import numpy as Math
-import pylab as Plot
-from DataLoader import DataLoader
+#import pylab as Plot
+from matplotlib import pyplot as Plot
+import gzip
+import cPickle
 	
 def Hbeta(D = Math.array([]), beta = 1.0):
 	"""Compute the perplexity and the P-row for a specific value of the precision of a Gaussian distribution."""
@@ -108,7 +110,7 @@ def tsne(X = Math.array([]), no_dims = 2, initial_dims = 50, perplexity = 30.0):
 	# Initialize variables
 	X = pca(X, initial_dims);
 	(n, d) = X.shape;
-	max_iter = 1000;
+	max_iter = 250;
 	initial_momentum = 0.5;
 	final_momentum = 0.8;
 	eta = 500;
@@ -165,21 +167,42 @@ def tsne(X = Math.array([]), no_dims = 2, initial_dims = 50, perplexity = 30.0):
 		
 	
 if __name__ == "__main__":
-	print "Run Y = tsne.tsne(X, no_dims, perplexity) to perform t-SNE on your dataset."
-	print "Running example on 2,500 MNIST digits..."
-	X = Math.loadtxt("mnist2500_X.txt");
 	
-	labels = Math.loadtxt("mnist2500_labels.txt");
-	data_loader = DataLoader()
-	#X1 = data_loader.load_data()
-	datasets=data_loader.load_data()
-	train_set_x, train_set_y = datasets[0]
- 	train_set_x=train_set_x[0:10000,:]
- 	train_set_y=train_set_y[0:10000]
-	#Y = tsne(X, 2, 50, 20.0);
-	#Plot.scatter(Y[:,0], Y[:,1], 20, labels);
-	train_set_x=train_set_x.astype('float64')
- 	Y = tsne(train_set_x, 2, 50, 20.0);
- 	Plot.scatter(Y[:,0], Y[:,1], 20, train_set_y);
+	print "Loading Data..."
+	data_file_name = '../data/mnist.pkl.gz'
+	with gzip.open(data_file_name, 'rb') as f:
+		train_data, valid_data, test_data = cPickle.load(f)
+
+	X = test_data[0]
+	X = X.astype(Math.float64)
 	
-	Plot.show()
+	labels = test_data[1]
+	labels = labels.astype(Math.float64)
+	
+	batch_size = 2500
+	n_minibatches = X.shape[0] / batch_size
+	plot_points_x = []
+	plot_points_y = []
+	plot_labels = []
+
+	print "Total number of samples: ", X.shape[0]
+	print "Minibatch size: ", batch_size
+	
+	for i in range(n_minibatches):
+		print 'batch no.: ' , i+1
+		data_batch = X[range(i*batch_size , i*batch_size + batch_size),:]
+		data_batch_labels = X[range(i*batch_size , i*batch_size + batch_size),:]
+		Y = tsne(data_batch, 2, 50, 20.0);
+		plot_points_x.append(Y[:,0])
+		plot_points_y.append(Y[:,1])
+		plot_labels.append(labels[range(i*batch_size , i*batch_size + batch_size)])
+		
+		
+		
+	
+	#Plot.scatter(plot_points_x, plot_points_y,  s = 1 , alpha = 0.5,labels)	
+	Plot.scatter(plot_points_x, plot_points_y, 20, plot_labels);
+	Plot.savefig('tsne_plot.png')
+	Plot.show(block=True)
+	
+	
