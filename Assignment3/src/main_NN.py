@@ -48,7 +48,7 @@ CLIMIN_GD_ALGO = "climin_gd"
 
 def _argparse():
     
-    argparse1 = ArgumentParser('main_LR.py',formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    argparse1 = ArgumentParser('main_NN.py',formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     argparse1.add_argument('-a', '--activation', help = 'activation to be used in the hidden layer 1. tanh 2. sigmoid  3. relu', default='tanh')
     argparse1.add_argument('-hu', type=int, help = 'number of neurons in the hidden layer', default=DEFAULT_NUM_HIDDEN_UNITS)
     argparse1.add_argument('-d', '--dropout_rate', help = 'Regularization Drop out rate ', default=0.0)

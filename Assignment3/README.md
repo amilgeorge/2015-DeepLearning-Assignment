@@ -47,8 +47,10 @@ Neural Network
 ---------------
 Implementation of neural network with regularization featues like dropout, l1,l2 regularization. The hidden layer of the can support multiple functions. The number of neurons can also be configured
 
+__NOTE: main_NN.py takes a compulsory argument ie the training algorithm. Please check below__
+
 ```
-usage: main_LR.py [-h] [-a ACTIVATION] [-hu HU] [-d DROPOUT_RATE]
+usage: main_NN.py [-h] [-a ACTIVATION] [-hu HU] [-d DROPOUT_RATE]
 {gd,rmsprop} ...
 
 positional arguments:
@@ -71,7 +73,7 @@ Regularization Drop out rate (default: 0.0)
 
 To train the network using custom implemented gradient descent method
 ```
-usage: main_LR.py gd [-h] [-t T] [-b BATCH_SIZE] [-l LEARNING_RATE] [-l1 L1]
+usage: main_NN.py gd [-h] [-t T] [-b BATCH_SIZE] [-l LEARNING_RATE] [-l1 L1]
 [-l2 L2]
 
 optional arguments:
@@ -90,7 +92,7 @@ learning rate
 To train the network using custom implemented rmsprop algorithm
 
 ```
-usage: main_LR.py rmsprop [-h] [-t T] [-b BATCH_SIZE] [-l LEARNING_RATE]
+usage: main_NN.py rmsprop [-h] [-t T] [-b BATCH_SIZE] [-l LEARNING_RATE]
 [-l1 L1] [-l2 L2] [-d DECAY]
 
 optional arguments:
