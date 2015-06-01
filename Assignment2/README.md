@@ -51,6 +51,14 @@ Bonus Question
 ---------------
 It is a bad practice to force the error rate to become too low because it might result in overfitting. We want our ML algorithms to perform well in real world conditions and not only on the training data.
 
+We use three data sets during training:
+
+1. Train Set
+2. Validation set
+3. Test Set
+
+The test set is not used during the training phase inorder to ensure that we have approximated the model correctly during our training phase.
+If we try to force the error rate on the test set to be low it defeats the purpose of the test set.
 
 Usage
 =====
