@@ -58,7 +58,7 @@ We use three data sets during training:
 3. Test Set
 
 The test set is not used during the training phase inorder to ensure that we have approximated the model correctly during our training phase.
-If we try to force the error rate on the test set to be low it defeats the purpose of the test set.
+If we try to force the error rate on the test set to be low it defeats the purpose of the test set. Ideally we should look at the test error only after we have trained the model and picked the parameters
 
 Usage
 =====
