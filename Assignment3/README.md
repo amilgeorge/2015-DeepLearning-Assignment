@@ -56,6 +56,8 @@ Problem 19
 -----------
 Custom implemented RMSProp trainer can acheive a test error of ~2.2 %. The sample run can be found in the folder Observations/2015-05-31 15:13:19. 
 
+Custom implemented with gradient descent achieves a test error of ~1.77%. The sample run can be found in the folder Observations/2015-06-01 23:11:49
+
 
 Usage
 ======
