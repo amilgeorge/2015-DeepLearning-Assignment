@@ -64,7 +64,7 @@ class rms_prop_trainer(trainer):
         y = T.ivector('y') 
         
         cost = (
-        nn.negative_log_likelihood(y)
+        nn.negative_log_likelihood_dropout(y)
         + self.L1_lambda * nn.L1
         + self.L2_lambda * nn.L2
         )

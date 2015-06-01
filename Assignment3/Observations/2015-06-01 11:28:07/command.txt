@@ -1,0 +1,1 @@
+python main_NN.py -d 0.3 rmsprop 

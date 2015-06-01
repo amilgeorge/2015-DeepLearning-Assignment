@@ -34,6 +34,13 @@ Problem 16
 ----------
 The choice of weight initialization is dependent on the activation function used because we want the gradients to be maximum in the begining
 
+Oservations/weight_init.png shows two cases. 
+
+1. The red line represents the training error when using the sigmoid activation function with weights initialized to the region where sigmoid has max derivative.
+
+2. The blue line represents the training error when using sigmoid activation function with weights initialized to the region where tanh has max derivative.
+
+
 The graph Observations/activation_comparison.png shows a comparison of training errors over each iteration with different activation functions
 
 Problem 17
